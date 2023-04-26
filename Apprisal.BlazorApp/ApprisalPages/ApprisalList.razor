@@ -1,0 +1,97 @@
+﻿@page "/list"
+<h3>ApprisalList</h3>
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <lable for="EvoluvationPeriod">Evoluvation Period</lable>
+            </th>
+            <th>
+                <lable for="Name">Name</lable>
+            </th>
+            <th>
+                <lable for="DateOfJoin">Date Of Join</lable>
+            </th>
+            <th>
+                <lable for="NumberOfLeavesTaken">Number Of Leaves Taken</lable>
+            </th>
+            <th>
+                <lable for="ClientDelivery">Client Delivery</lable>
+            </th>
+            <th>
+                <lable for="Responsibility">Responsibility</lable>
+            </th>
+            <th>
+                <lable for="Skills">Skills</lable>
+            </th>
+            <th>
+                <lable for="Certifiate">Certifiate</lable>
+            </th>
+            <th>
+                <lable for="Feedback">Feedback</lable>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var item in Model)
+        {
+        <tr>
+        <td>
+        @Html.DisplayFor(modelItem => item.EvoluvationPeriod)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.DateOfJoin)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.NumberOfLeavesTaken)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.ClientDelivery)
+        <h6>@Html.DisplayFor(modelItem => item.ClientDeliveryFeed)</h6>
+        </td>
+
+        <td>
+        @Html.DisplayFor(modelItem => item.Responsibility)
+        <h6>@Html.DisplayFor(modelItem => item.ResponsibilitiesFeed)</h6>
+
+        </td>
+
+        <td>
+        @Html.DisplayFor(modelItem => item.Skills)
+        <h6>
+        v
+        @Html.DisplayFor(modelItem => item.SkillsFeed)
+
+        </h6>
+        </td>
+
+        <td>
+        @Html.DisplayFor(modelItem => item.Certifiate)
+        </td>
+        <td>
+
+        @Html.DisplayFor(modelItem => item.Feedback)
+        </td>
+        <td>
+        <a herf="/edit/{ApprisalId}" asp-route-id="@item.ApprisalId">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.ApprisalId">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.ApprisalId">Delete</a>
+        </td>
+        </tr>
+        }*@
+    </tbody>
+</table>
+
+
+@code {
+
+}
