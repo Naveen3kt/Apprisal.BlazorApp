@@ -1,179 +1,194 @@
 ﻿@page "/add"
-
+@using ServiceRepository
+@using System
+@using System.Collections.Generic
+@using System.Linq
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+@inject IApprisalService service
+@inject NavigationManager Navmanager
 
 <h3>CreateApprisal</h3>
 <hr />
 <div class="row">
-<div class="col-md-8">
-        <EditForm OnSubmit="HandelSubmit">
-        <div class="form-group col-md-6">
-            <lable>Evaluvation Period</lable>
-            <InputText  > </InputText>
-        </div>
-
-
-    </EditForm>
-
-
-</div>
-</div>
-
-
-
-
-@code {
-    //public ApprisalModel apprisal { get; set; } = new ApprisalModel();
-
-    public CreateApprisal()
-    {
-    }
-
-    public void HandelSubmit()
-    {
-        
-    }
-
-
-
-}
-
-@*<div class="row">
     <div class="col-md-8">
-        <form asp-action="Create">
+        @if (showAlert)
+        {
+            <div class="@Alerttype" role="alert">
+                <b>@ResponseMesssage</b>
+            </div>
 
-
-            <div class="col-md-6">
-                <label asp-for="EvoluvationPeriod" class="control-label"></label>
-                <select asp-for="EvoluvationPeriod" class="form-control">
+        }
+        @*@if (!ModelState.IsValid)
+        {
+        <p>Please fix the errors above and try again.</p>
+        }*@
+        <EditForm Model="apprisalform" OnValidSubmit="HandelSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary/>
+            <div class="form-group col-md-6">
+                <lable for="EvoluvationPeriod">Evaluvation Period</lable>
+                <InputSelect class="form-control" @bind-Value="apprisalform.EvoluvationPeriod">
                     <option value="">Select Evaluation Period</option>
                     <option value="April-2018 to March-2019">April-2018 to March-2019</option>
                     <option value="April-2019 to March-2020">April-2019 to March-2020</option>
                     <option value="April-2020 to March-2021">April-2020 to March-2021</option>
                     <option value="April-2021 to March-2022">April-2021 to March-2022</option>
                     <option value="April-2022 to March-2023">April-2022 to March-2023</option>
-                </select>
-                <span asp-validation-for="EvoluvationPeriod" class="text-danger"></span>
-
-            </div>
-
-
-
-            <div class="form-group col-md-6">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group col-md-6">
-                <label asp-for="DateOfJoin" class="control-label"></label>
-                <input asp-for="DateOfJoin" class="form-control" />
-                <span asp-validation-for="DateOfJoin" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group col-md-6">
-                <label asp-for="NumberOfLeavesTaken" class="control-label"></label>
-                <input asp-for="NumberOfLeavesTaken" class="form-control" />
-                <span asp-validation-for="NumberOfLeavesTaken" class="text-danger"></span>
+                </InputSelect>
+                <ValidationMessage For="(()=>apprisalform.EvoluvationPeriod)" />
             </div><br />
 
+            <div class="form-group col-md-6">
+                <lable for="Name">Name</lable>
+                <InputText class="form-control" @bind-Value="apprisalform.Name"></InputText>
+                <ValidationMessage For="(()=>apprisalform.Name)" />
+            </div><br />
 
+            <div class="form-group col-md-6">
+                <lable For="DateOfJoin">Date Of Join</lable>
+                <InputDate class="form-control" @bind-Value="apprisalform.DateOfJoin"></InputDate>
+                <ValidationMessage For="(()=>apprisalform.DateOfJoin)" />
+            </div><br />
 
+            <div class="form-group col-md-6">
+                <label for="NumberOfLeavesTaken" class="control-label">Number Of Leaves Taken</label>
+                <input class="form-control" @bind="apprisalform.NumberOfLeavesTaken" step="0.01" />
+                <ValidationMessage For="(()=>apprisalform.DateOfJoin)" />
+            </div><br />
 
             <div>
                 <h6 class=" text-black ">Accomplishments</h6>
-
                 <div class="form-group col-md-8">
-                    <label asp-for="ClientDelivery" class="control-label"></label><br />
-
+                    <label for="ClientDelivery" class="control-label"></label><br />
                     <div class="row">
                         <div class=" col-md-4">
-                            <select asp-for="ClientDelivery" class="form-control" asp-items="Html.GetEnumSelectList<ClientDelivery>()">
-                                <option value=" ">Select Rating</option>
+                            <select class="form-control" @bind="apprisalform.ClientDelivery">
+                                <option value="" selected>Select any Options</option>
+                                @foreach (var list in Enum.GetValues(typeof(Model.ClientDelivery)))
+                                {
+                                    <option value="@list">@list.ToString()</option>
+                                }
                             </select>
-                            <span asp-validation-for="ClientDelivery" class="text-danger"></span>
+                            <ValidationMessage For="(() =>apprisalform.ClientDelivery)" />
+                        </div><br />
 
-                        </div>
                         <div class="col-sm-6">
-                            <textarea asp-for="ClientDeliveryFeed" class="form-control"></textarea>
-                            <span asp-validation-for="ClientDeliveryFeed" class="text-danger"></span>
+                            <InputTextArea class="form-control" @bind-Value="apprisalform.ClientDeliveryFeed"></InputTextArea>
+                            <ValidationMessage For="(()=>apprisalform.ClientDeliveryFeed)" />
                         </div>
                     </div>
 
                 </div>
-            </div>
-            <br />
-
-
-
-
+            </div><br />
 
             <div class="form-group col-md-8">
-                <label asp-for="Responsibility" class="control-label">Responsibility to Others</label>
+                <label for="Responsibility" class="control-label">Responsibility to Others</label>
                 <div class="row">
                     <div class=" col-md-4">
-                        <select asp-for="Responsibility" class="form-control" asp-items="Html.GetEnumSelectList<Responsibilities>()">
-                            <option>Give Rating</option>
+                        <select @bind="apprisalform.Responsibility" class="form-control">
+                            <option value="" selected>Select any Options</option>
+                            @foreach (var list in Enum.GetValues(typeof(Model.Responsibilities)))
+                            {
+                                <option value="@list">@list.ToString()</option>
+                            }
                         </select>
-                        <span asp-validation-for="Responsibility" class="text-danger"></span><br />
+                        <ValidationMessage For="(()=>apprisalform.Responsibility)" />
                     </div>
                     <div class="col-sm-6">
-                        <textarea asp-for="ResponsibilitiesFeed" class="form-control"></textarea>
-                        <span asp-validation-for="ResponsibilitiesFeed" class="text-danger"></span>
+                        <InputTextArea @bind-Value="apprisalform.ResponsibilitiesFeed" class="form-control"></InputTextArea>
+                        <ValidationMessage For="(()=>apprisalform.ResponsibilitiesFeed)" />
                     </div>
                 </div>
 
             </div><br />
 
-
-
             <div class="form-group col-md-8">
-                <label asp-for="Skills" class="control-label"></label>
+                <label for="Skills" class=" control-label">Skills</label>
                 <div class="row">
                     <div class=" col-md-4">
-                        <select asp-for="Skills" class="form-control" asp-items="Html.GetEnumSelectList<Skill>()">
-                            <option>Select Skills</option>
+                        <select @bind="apprisalform.Skills" class="form-control">
+                            <option value="" selected>Select Skills</option>
+                            @foreach (var list in Enum.GetValues(typeof(Model.Skills)))
+                            {
+                                <option value="@list">@list.ToString()</option>
+                            }
                         </select>
-                        <span asp-validation-for="Skills" class="text-danger"></span>
+                        <ValidationMessage For="(()=>apprisalform.Skills)" />
                     </div>
                     <div class="col-sm-6">
-                        <textarea asp-for="SkillsFeed" class="form-control"></textarea>
-                        <span asp-validation-for="SkillsFeed" class="text-danger"></span><br />
+                        <InputTextArea @bind-Value="apprisalform.SkillsFeed" class="form-control"></InputTextArea>
+                        <ValidationMessage For="(()=>apprisalform.SkillsFeed)" />
                     </div>
                 </div>
 
             </div><br />
 
-
-
             <div class="form-group col-md-6">
-                <label asp-for="Certifiate" class="control-label"></label>
-                <input asp-for="Certifiate" class="form-control" />
-                <span asp-validation-for="Certifiate" class="text-danger"></span>
-            </div>
-
-
-
-            <h6 class="form-group ">Mention any general comments or feedback here...</h6>
-
-            <div class="form-group col-md-6">
-                <textarea asp-for="Feedback" class="form-control"></textarea>
-                <span asp-validation-for="Feedback" class="text-danger"></span>
+                <label for="Certifiate" class="control-label">Certificate</label>
+                <InputText @bind-Value="apprisalform.Certifiate" class="form-control" />
+                <ValidationMessage For="(()=>apprisalform.Certifiate)" />
             </div><br />
 
+            <div class="form-group col-md-6">
+                <label for="AboutCourse" class="control-label">About Course</label>
+                <InputText @bind-Value="apprisalform.AboutCourse" class="form-control" />
+                <ValidationMessage For="(()=>apprisalform.AboutCourse)" /><br />
+            </div><br />
 
-
+            <div class="form-group col-md-6">
+                <h6 class="form-group ">Mention any general comments or feedback here...</h6>
+                <InputTextArea @bind-Value="apprisalform.Feedback" class="form-control"></InputTextArea>
+                <ValidationMessage For="(()=>apprisalform.Feedback)" />
+            </div><br />
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-        </form>
+        </EditForm>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-*@
 
+
+
+
+
+
+
+@code {
+    private Model.ApprisalModel apprisalform = new Model.ApprisalModel();
+    private string ResponseMesssage = string.Empty;
+    private bool showAlert = false;
+    private string Alerttype = string.Empty;
+
+    public async Task HandelSubmit()
+    {
+        ResponseMesssage =  await service.AddApprisal(apprisalform);
+
+        if (ResponseMesssage.Contains("Added"))
+        {
+            Alerttype = "alert alert-success";
+             _ = ShowAlert();
+            Navmanager.NavigateTo("/list");
+        }
+        else
+        {
+            Alerttype = "alert alert-danger";
+            _ = ShowAlert();
+        }
+    }
+
+    private async Task ShowAlert()
+    {   
+        showAlert = true;
+        StateHasChanged();
+        await Task.Delay(3000);
+        showAlert = false;
+        StateHasChanged();
+    }
+
+
+
+}

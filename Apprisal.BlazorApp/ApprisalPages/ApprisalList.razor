@@ -1,4 +1,27 @@
 ﻿@page "/list"
+@inject NavigationManager navman
+<h3>Apprisallist</h3>
+
+@code {
+
+    //void Edit(int id)
+    //{
+    //    navman.NavigateTo($"edit/{id}");
+    //}
+    //void Confirmation(int id)
+    //{
+    //    service.Delete(id);
+    //}
+    //void redirectto()
+    //{
+    //    navman.NavigateTo($"/add");
+    //}
+}
+
+
+
+@*<button @onclick="(()=> redirectto())"> </button>
+
 <h3>ApprisalList</h3>
 
 
@@ -33,65 +56,61 @@
                 <lable for="Certifiate">Certifiate</lable>
             </th>
             <th>
+                <lable for="AboutCourse">AboutCourse</lable>
+            </th>
+            <th>
                 <lable for="Feedback">Feedback</lable>
             </th>
             <th></th>
         </tr>
     </thead>
+
     <tbody>
-        @*@foreach (var item in Model)
+        @foreach (var item in Apprisaldata)
         {
-        <tr>
-        <td>
-        @Html.DisplayFor(modelItem => item.EvoluvationPeriod)
-        </td>
-        <td>
-        @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-        @Html.DisplayFor(modelItem => item.DateOfJoin)
-        </td>
-        <td>
-        @Html.DisplayFor(modelItem => item.NumberOfLeavesTaken)
-        </td>
-        <td>
-        @Html.DisplayFor(modelItem => item.ClientDelivery)
-        <h6>@Html.DisplayFor(modelItem => item.ClientDeliveryFeed)</h6>
-        </td>
-
-        <td>
-        @Html.DisplayFor(modelItem => item.Responsibility)
-        <h6>@Html.DisplayFor(modelItem => item.ResponsibilitiesFeed)</h6>
-
-        </td>
-
-        <td>
-        @Html.DisplayFor(modelItem => item.Skills)
-        <h6>
-        v
-        @Html.DisplayFor(modelItem => item.SkillsFeed)
-
-        </h6>
-        </td>
-
-        <td>
-        @Html.DisplayFor(modelItem => item.Certifiate)
-        </td>
-        <td>
-
-        @Html.DisplayFor(modelItem => item.Feedback)
-        </td>
-        <td>
-        <a herf="/edit/{ApprisalId}" asp-route-id="@item.ApprisalId">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.ApprisalId">Details</a> |
-        <a asp-action="Delete" asp-route-id="@item.ApprisalId">Delete</a>
-        </td>
-        </tr>
-        }*@
+            <tr>
+                <td>
+                    <b>item.ApprisalId</b>
+                </td>
+                <td>
+                    <b>item.EvaluvationPeriod</b>
+                </td>
+                <td>
+                    <b>item.Name</b>
+                </td>
+                <td>
+                    <p>item.DateOfJoin</p>
+                </td>
+                <td>
+                    <p>item.NumberOfLeavesTaken</p>
+                </td>
+                <td>
+                    <p>item.ClientDelivery</p>
+                    <h6>item.ClientDeliveryFeed</h6>
+                </td>
+                <td>
+                    <p>item.Responsibility</p>
+                    <h6>item.ResponsibilitiesFeed</h6>
+                </td>
+                <td>
+                    <p>item.Skills</p>
+                    <h6>item.SkillsFeed</h6>
+                </td>
+                <td>
+                    <p>item.Certifiate</p>
+                </td>
+                <td>
+                    <p>item.AboutCourse</p>
+                </td>
+                <td>
+                    <p>item.Feedback</p>
+                </td>
+                <td>
+                    <button class="btn btn-primary" @onclick="(() => Edit(item.ApprisalId))">Edit</button>
+                    <button class="btn btn-danger" @onclick="(() => Confirmation(item.ApprisalId))">Delete</button>
+                </td>
+            </tr>
+        }
+        }
     </tbody>
-</table>
-
-
-@code {
-
-}
+</table>*@

@@ -43,7 +43,7 @@ namespace Apprisal.BlazorApp.Model
         public string? ResponsibilitiesFeed { get; set; }
 
         [Required]
-        public Skill Skills { get; set; }
+        public Skills Skills { get; set; }
 
 
         [Required]
@@ -73,7 +73,7 @@ namespace Apprisal.BlazorApp.Model
         Achieves,
         NeedImprovment
     }
-    public enum Skill
+    public enum Skills
     {
         Good,
         AboveAverage,

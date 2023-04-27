@@ -5,9 +5,9 @@ namespace Apprisal.BlazorApp.ServiceRepository
     public interface IApprisalService
     {
         Task<List<ApprisalModel>> GetAll();
-        Task<ApprisalModel> GetbyId();
-        Task<string> AddApprisal();
-        Task<string> EditApprisal();
-        Task<bool> Delete();
+        Task<ApprisalModel?> GetbyId(int Id);
+        Task<string> AddApprisal(ApprisalModel apprisalform);
+        Task<string> EditApprisal(ApprisalModel form);
+        Task<bool> Delete(int Id);
     }
 }
