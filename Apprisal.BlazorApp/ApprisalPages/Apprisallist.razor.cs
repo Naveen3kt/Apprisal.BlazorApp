@@ -6,7 +6,7 @@ namespace Apprisal.BlazorApp.ApprisalPages
 {
     public partial class Apprisallist : ComponentBase
     {
-        private List<ApprisalModel>? apprisalModels;
+        public List<ApprisalModel>? apprisalModels;
         protected override async Task OnInitializedAsync()
         {
             apprisalModels = await service.GetAll();
