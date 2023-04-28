@@ -7,7 +7,7 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 @inject IApprisalService service
-@inject NavigationManager Navmanager
+@inject NavigationManager navman
 
 <h3>CreateApprisal</h3>
 <hr />
@@ -147,14 +147,11 @@
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </EditForm>
+                <button type="reset" @onclick="(()=>cancelcreate())" class="btn btn-outline-dark ">Cancel</button>
+            </div><br />
+        </EditForm><br />
     </div>
 </div>
-
-
-
-
 
 
 
@@ -173,7 +170,7 @@
         {
             Alerttype = "alert alert-success";
              _ = ShowAlert();
-            Navmanager.NavigateTo("/list");
+            navman.NavigateTo("/list");
         }
         else
         {
@@ -190,7 +187,11 @@
         showAlert = false;
         StateHasChanged();
     }
-
+    private void cancelcreate()
+    {
+        apprisalform = new();
+        navman.NavigateTo("/list");
+    }
 
 
 }

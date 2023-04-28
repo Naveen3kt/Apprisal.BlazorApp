@@ -8,7 +8,13 @@
    
     <div class="col-md-8">
         <button class="btn btn-primary" @onclick="(()=>redirectto())">Create New Apprisal</button>
-        @if (apprisalModels != null)
+        @if (apprisalModels == null)
+        {
+            <div>
+                <h6>No data Found</h6>
+            </div>            
+        }
+        else
         {
             <table class="table">
                 <thead class="bg-gradient">
@@ -43,7 +49,7 @@
                         <th>
                             <lable for="Feedback">Feedback</lable>
                         </th>
-                        <th >
+                        <th>
                             <h6 class="btn btn-info">Action</h6>
                         </th>
                     </tr>
@@ -93,12 +99,6 @@
                     }
                 </tbody>
             </table>
-        }
-        else
-        {
-            <div>
-                <h6>No data Found</h6>
-            </div>
         }
     </div>
 </div>

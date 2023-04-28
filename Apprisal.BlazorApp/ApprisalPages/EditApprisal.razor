@@ -9,139 +9,150 @@
 <div class="row">
     <div class="col-md-2">
     </div>
-    <div class="col-md-10">
-        @if (showAlert)
-        {
-            <div class="@Alerttype" role="alert">
-                <b>@ResponseMesssage</b>
-            </div>
+    @if (apprisalform != null)
+    {
+        <div class="col-md-10">
+            @if (showAlert)
+            {
+                <div class="@Alerttype" role="alert">
+                    <b>@ResponseMesssage</b>
+                </div>
 
-        }
-        <EditForm Id="@Id" Model="apprisalform" OnValidSubmit="HandelSubmit">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="form-group col-md-6">
-                <lable for="EvoluvationPeriod">Evaluvation Period</lable>
-                <InputSelect class="form-control" @bind-Value="apprisalform.EvoluvationPeriod">
-                    <option value="">Select Evaluation Period</option>
-                    <option value="April-2018 to March-2019">April-2018 to March-2019</option>
-                    <option value="April-2019 to March-2020">April-2019 to March-2020</option>
-                    <option value="April-2020 to March-2021">April-2020 to March-2021</option>
-                    <option value="April-2021 to March-2022">April-2021 to March-2022</option>
-                    <option value="April-2022 to March-2023">April-2022 to March-2023</option>
-                </InputSelect>
-                <ValidationMessage For="(()=>apprisalform.EvoluvationPeriod)" />
-            </div><br />
+            }
+            <EditForm Id="@Id" Model="apprisalform" OnValidSubmit="HandelSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="form-group col-md-6">
+                    <lable for="EvoluvationPeriod">Evaluvation Period</lable>
+                    <InputSelect class="form-control" @bind-Value="apprisalform.EvoluvationPeriod">
+                        <option value="">Select Evaluation Period</option>
+                        <option value="April-2018 to March-2019">April-2018 to March-2019</option>
+                        <option value="April-2019 to March-2020">April-2019 to March-2020</option>
+                        <option value="April-2020 to March-2021">April-2020 to March-2021</option>
+                        <option value="April-2021 to March-2022">April-2021 to March-2022</option>
+                        <option value="April-2022 to March-2023">April-2022 to March-2023</option>
+                    </InputSelect>
+                    <ValidationMessage For="(()=>apprisalform.EvoluvationPeriod)" />
+                </div><br />
 
-            <div class="form-group col-md-6">
-                <lable for="Name">Name</lable>
-                <InputText class="form-control" @bind-Value="apprisalform.Name"></InputText>
-                <ValidationMessage For="(()=>apprisalform.Name)" />
-            </div><br />
+                <div class="form-group col-md-6">
+                    <lable for="Name">Name</lable>
+                    <InputText class="form-control" @bind-Value="apprisalform.Name"></InputText>
+                    <ValidationMessage For="(()=>apprisalform.Name)" />
+                </div><br />
 
-            <div class="form-group col-md-6">
-                <lable For="DateOfJoin">Date Of Join</lable>
-                <InputDate class="form-control" @bind-Value="apprisalform.DateOfJoin"></InputDate>
-                <ValidationMessage For="(()=>apprisalform.DateOfJoin)" />
-            </div><br />
+                <div class="form-group col-md-6">
+                    <lable For="DateOfJoin">Date Of Join</lable>
+                    <InputDate class="form-control" @bind-Value="apprisalform.DateOfJoin"></InputDate>
+                    <ValidationMessage For="(()=>apprisalform.DateOfJoin)" />
+                </div><br />
 
-            <div class="form-group col-md-6">
-                <label for="NumberOfLeavesTaken" class="control-label">Number Of Leaves Taken</label>
-                <input class="form-control" @bind="apprisalform.NumberOfLeavesTaken" step="0.01" />
-                <ValidationMessage For="(()=>apprisalform.DateOfJoin)" />
-            </div><br />
+                <div class="form-group col-md-6">
+                    <label for="NumberOfLeavesTaken" class="control-label">Number Of Leaves Taken</label>
+                    <input class="form-control" @bind="apprisalform.NumberOfLeavesTaken" step="0.01" />
+                    <ValidationMessage For="(()=>apprisalform.DateOfJoin)" />
+                </div><br />
 
-            <div>
-                <h6 class=" text-black ">Accomplishments</h6>
+                <div>
+                    <h6 class=" text-black ">Accomplishments</h6>
+                    <div class="form-group col-md-8">
+                        <label for="ClientDelivery" class="control-label"></label><br />
+                        <div class="row">
+                            <div class=" col-md-4">
+                                <select class="form-control" @bind="apprisalform.ClientDelivery">
+                                    <option value="" selected>Select any Options</option>
+                                    @foreach (var list in Enum.GetValues(typeof(Model.ClientDelivery)))
+                                    {
+                                        <option value="@list">@list.ToString()</option>
+                                    }
+                                </select>
+                                <ValidationMessage For="(() =>apprisalform.ClientDelivery)" />
+                            </div><br />
+
+                            <div class="col-sm-6">
+                                <InputTextArea class="form-control" @bind-Value="apprisalform.ClientDeliveryFeed"></InputTextArea>
+                                <ValidationMessage For="(()=>apprisalform.ClientDeliveryFeed)" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div><br />
+
                 <div class="form-group col-md-8">
-                    <label for="ClientDelivery" class="control-label"></label><br />
+                    <label for="Responsibility" class="control-label">Responsibility to Others</label>
                     <div class="row">
                         <div class=" col-md-4">
-                            <select class="form-control" @bind="apprisalform.ClientDelivery">
+                            <select @bind="apprisalform.Responsibility" class="form-control">
                                 <option value="" selected>Select any Options</option>
-                                @foreach (var list in Enum.GetValues(typeof(Model.ClientDelivery)))
+                                @foreach (var list in Enum.GetValues(typeof(Model.Responsibilities)))
                                 {
                                     <option value="@list">@list.ToString()</option>
                                 }
                             </select>
-                            <ValidationMessage For="(() =>apprisalform.ClientDelivery)" />
-                        </div><br />
-
+                            <ValidationMessage For="(()=>apprisalform.Responsibility)" />
+                        </div>
                         <div class="col-sm-6">
-                            <InputTextArea class="form-control" @bind-Value="apprisalform.ClientDeliveryFeed"></InputTextArea>
-                            <ValidationMessage For="(()=>apprisalform.ClientDeliveryFeed)" />
+                            <InputTextArea @bind-Value="apprisalform.ResponsibilitiesFeed" class="form-control"></InputTextArea>
+                            <ValidationMessage For="(()=>apprisalform.ResponsibilitiesFeed)" />
                         </div>
                     </div>
 
-                </div>
-            </div><br />
+                </div><br />
 
-            <div class="form-group col-md-8">
-                <label for="Responsibility" class="control-label">Responsibility to Others</label>
-                <div class="row">
-                    <div class=" col-md-4">
-                        <select @bind="apprisalform.Responsibility" class="form-control">
-                            <option value="" selected>Select any Options</option>
-                            @foreach (var list in Enum.GetValues(typeof(Model.Responsibilities)))
-                            {
-                                <option value="@list">@list.ToString()</option>
-                            }
-                        </select>
-                        <ValidationMessage For="(()=>apprisalform.Responsibility)" />
+                <div class="form-group col-md-8">
+                    <label for="Skills" class=" control-label">Skills</label>
+                    <div class="row">
+                        <div class=" col-md-4">
+                            <select @bind="apprisalform.Skills" class="form-control">
+                                <option value="" selected>Select Skills</option>
+                                @foreach (var list in Enum.GetValues(typeof(Model.Skills)))
+                                {
+                                    <option value="@list">@list.ToString()</option>
+                                }
+                            </select>
+                            <ValidationMessage For="(()=>apprisalform.Skills)" />
+                        </div>
+                        <div class="col-sm-6">
+                            <InputTextArea @bind-Value="apprisalform.SkillsFeed" class="form-control"></InputTextArea>
+                            <ValidationMessage For="(()=>apprisalform.SkillsFeed)" />
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <InputTextArea @bind-Value="apprisalform.ResponsibilitiesFeed" class="form-control"></InputTextArea>
-                        <ValidationMessage For="(()=>apprisalform.ResponsibilitiesFeed)" />
-                    </div>
-                </div>
 
-            </div><br />
+                </div><br />
 
-            <div class="form-group col-md-8">
-                <label for="Skills" class=" control-label">Skills</label>
-                <div class="row">
-                    <div class=" col-md-4">
-                        <select @bind="apprisalform.Skills" class="form-control">
-                            <option value="" selected>Select Skills</option>
-                            @foreach (var list in Enum.GetValues(typeof(Model.Skills)))
-                            {
-                                <option value="@list">@list.ToString()</option>
-                            }
-                        </select>
-                        <ValidationMessage For="(()=>apprisalform.Skills)" />
-                    </div>
-                    <div class="col-sm-6">
-                        <InputTextArea @bind-Value="apprisalform.SkillsFeed" class="form-control"></InputTextArea>
-                        <ValidationMessage For="(()=>apprisalform.SkillsFeed)" />
-                    </div>
-                </div>
+                <div class="form-group col-md-6">
+                    <label for="Certifiate" class="control-label">Certificate</label>
+                    <InputText @bind-Value="apprisalform.Certifiate" class="form-control" />
+                    <ValidationMessage For="(()=>apprisalform.Certifiate)" />
+                </div><br />
 
-            </div><br />
+                <div class="form-group col-md-6">
+                    <label for="AboutCourse" class="control-label">About Course</label>
+                    <InputText @bind-Value="apprisalform.AboutCourse" class="form-control" />
+                    <ValidationMessage For="(()=>apprisalform.AboutCourse)" />
+                </div><br />
 
-            <div class="form-group col-md-6">
-                <label for="Certifiate" class="control-label">Certificate</label>
-                <InputText @bind-Value="apprisalform.Certifiate" class="form-control" />
-                <ValidationMessage For="(()=>apprisalform.Certifiate)" />
-            </div><br />
+                <div class="form-group col-md-6">
+                    <h6 class="form-group ">Mention any general comments or feedback here...</h6>
+                    <InputTextArea @bind-Value="apprisalform.Feedback" class="form-control"></InputTextArea>
+                    <ValidationMessage For="(()=>apprisalform.Feedback)" />
+                </div><br />
 
-            <div class="form-group col-md-6">
-                <label for="AboutCourse" class="control-label">About Course</label>
-                <InputText @bind-Value="apprisalform.AboutCourse" class="form-control" />
-                <ValidationMessage For="(()=>apprisalform.AboutCourse)" />
-            </div><br />
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-success" />
+                    <button type="reset" @onclick=" (()=>canceledit())" class="btn btn-outline-dark">Cancel</button>
+                </div><br/>
 
-            <div class="form-group col-md-6">
-                <h6 class="form-group ">Mention any general comments or feedback here...</h6>
-                <InputTextArea @bind-Value="apprisalform.Feedback" class="form-control"></InputTextArea>
-                <ValidationMessage For="(()=>apprisalform.Feedback)" />
-            </div><br />
+            </EditForm><br/>
 
-            <div class="form-group">
-                <input type="submit" value="Update" class="btn btn-primary" />
-            </div>
-        </EditForm>
-      
-    </div>
+        </div>
+    }
+    else
+    {
+        <div>
+            <h6>No data Found</h6>
+        </div>
+    }
 </div>
 @code {
     [Parameter]
@@ -163,17 +174,24 @@
 
     public async Task HandelSubmit()
     {
-        ResponseMesssage = await service.EditApprisal(apprisalform);
-        if (ResponseMesssage.Contains("Sucessfully"))
+        if (apprisalform != null)
         {
-            Alerttype = "alert alert-success";            
-            _ = ShowAlert();
-            //navman.NavigateTo("/list");
+            ResponseMesssage = await service.EditApprisal(apprisalform);
+            if (ResponseMesssage.Contains("Sucessfully"))
+            {
+                Alerttype = "alert alert-success";
+                _ = ShowAlert();
+                navman.NavigateTo("/list");
+            }
+            else
+            {
+                Alerttype = "alert alert-danger";
+                _ = ShowAlert();
+            }
         }
         else
         {
-            Alerttype = "alert alert-danger";
-            _ = ShowAlert();
+            throw new Exception($"{apprisalform.ApprisalId} Not found");
         }
     }
 
@@ -185,6 +203,11 @@
         await Task.Delay(3000);
         showAlert = false;
         StateHasChanged();
+    }
+    private void canceledit()
+    {
+        apprisalform = new();
+        navman.NavigateTo("/list");
     }
 
 }
